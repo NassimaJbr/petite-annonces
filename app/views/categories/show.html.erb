@@ -1,0 +1,80 @@
+<div class="category-show-container">
+  <% @category_articles.each do |article| %>
+    <%= link_to article_path(article) do %>
+      <%= image_tag(article.image.url || random_image(@category.id))  %>
+      <div class="article-info">
+        <h2 class="article-title"><%= truncate(article.title, length: 25) %></h2>
+        <p class="article-text"><%= truncate(article.text, length: 100) %></p>
+        <p class="article-price">Prix : <%= number_to_currency(article.prix_max)%></p>
+        <%= pluralize(article.votes.count, 'like') %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<style>
+  
+ .category-show-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.category-show-container a {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-gap: 20px;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: var(--box-shadow);
+  transition: 0.3s;
+  border-radius: 5px;
+  color: var(--on-background);
+  background-color: var(--background);
+}
+
+.category-show-container img {
+  border: 1px solid white;
+  border-radius: 5px;
+  object-fit: cover;
+  box-shadow: 10px 5px 5px grey;
+  width: 100%;
+  height: 100%;
+}
+
+.category-show-container .article-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.category-show-container h2.article-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.category-show-container p.article-text {
+  margin: 0;
+  margin-bottom: 10px;
+  max-width: 340px; /* ou toute autre valeur que vous souhaitez */
+  word-wrap: break-word;
+}
+
+.category-show-container p.article-price {
+  margin: 0;
+}
+
+.category-show-container a:hover {
+  text-decoration: none;
+  background-color: rgb(226, 226, 226);
+  border-bottom: none;
+  color:black;
+  transform: translateY(-5px);
+}
+  </style>
+
+

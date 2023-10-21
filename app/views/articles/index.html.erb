@@ -1,0 +1,46 @@
+<div class="articles">
+  <% @articles.each do |article| %>
+    <div class="article">
+      <h2 class="article-title"><%= link_to article.title, article_path(article) %></h2>
+      <% if article.image.present? %>
+        <%= image_tag article.image.url %>
+      <% end %>
+      <p class="article-text"><%= truncate(article.text, length: 200) %></p>
+      <% if current_user && current_user == article.creator %>
+        <%= link_to "Edit", edit_article_path(article) %>
+        <%= link_to "Delete", article_path(article), method: :delete, data: { confirm: "Are you sure you want to delete this article?" } %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+
+
+
+<h1><%= @title %></h1>
+
+<% @articles.each do |article| %>
+  <section class="article">
+    <div class="summary">
+      <h2>
+        <%= link_to article.title, article_path(article) %>
+      </h2>
+      <%= image_tag article.image.url%>
+      <p>
+        <%= truncate(article.text, length: 150, separator: ' ') %>
+      </p>
+      <span class= "ml-3 "><%= pluralize(article.votes.count, 'like') %></span>
+      
+      <p>
+        Created by 
+        <strong><%= article.creator.username %></strong>,
+        <%= time_ago_in_words(article.created_at) %> ago<%= %> 
+      </p>
+
+    </div>
+  </section>
+<% end %>
+

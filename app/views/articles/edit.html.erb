@@ -1,0 +1,91 @@
+<div class="article-form">
+  <%= form_for @article do |f| %>
+    <% if @article.errors.any? %>
+      <div class="alert alert-danger">
+        <ul>
+        <% @article.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :text %>
+      <%= f.text_area :text, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :image %>
+      <%= f.file_field :image, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :prix %>
+      <%= f.number_field :prix_max, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :category_id %>
+      <%= f.select :category_id, Category.all.collect { |c| [c.name, c.id] }, {}, { class: "form-control" } %>
+    </div>
+    <%= f.submit "Update", class: "btn btn-primary" %>
+  <% end %>
+</div>
+
+<style>
+    .article-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.article-form .form-group {
+  margin-bottom: 20px;
+}
+
+.article-form label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.article-form input[type="text"],
+.article-form textarea,
+.article-form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.article-form input[type="submit"],
+.article-form a.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.article-form input[type="submit"]:hover,
+.article-form a.btn:hover {
+  background-color: #0062cc;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  margin-bottom: 20px;
+  padding: .75rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+}
+    </style>

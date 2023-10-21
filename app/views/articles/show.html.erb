@@ -1,0 +1,71 @@
+<div class= 'article-show-container'>
+  <%= image_tag( @article.image.url ? @article.image.url : random_image(@article.category_id)) %>
+  <h1 class=""><%= @article.title%></h1>
+  <p class="articles-text"><%= @article.text%></p>
+  <span class= ''>Author : <strong class="" ><%= @article.creator.username %> </strong></span>
+       <p class="article-price">Prix : <%= number_to_currency(@article.prix_max)%></p>
+
+  <span ><%= pluralize(@article.votes.count, 'like') %></span>
+    <%= vote_button(@article,@vote) %>
+    <% if current_user && current_user == @article.creator %>
+    <%= link_to "Edit", edit_article_path(@article) %>
+    <%end%>
+</div>
+
+
+
+
+<style>
+
+
+.article-show-container p.articles-text {
+  margin: 0;
+  margin-bottom: 10px;
+  max-width: 800px; /* ou toute autre valeur que vous souhaitez */
+  word-wrap: break-word;
+}
+
+
+
+.article {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.article-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.article-text {
+  text-align: justify;
+  margin: 0;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.articles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.articles .article {
+  width: 48%;
+}
+
+.articles .article img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.articles .article a {
+  display: block;
+  margin-top: 10px;
+}
+</style>
